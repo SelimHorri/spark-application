@@ -13,58 +13,62 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<scala.version>2.12</scala.version>
+	      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<scala.version>2.11</scala.version>
 		<spark.version>2.3.1</spark.version>
 	</properties>
 	
- <dependencies>
-    <!-- Spark -->
-	<dependency>
-		<groupId>org.apache.spark</groupId>
-		<artifactId>spark-core_${scala.version}</artifactId>
-		<version>${spark.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.spark</groupId>
-		<artifactId>spark-sql_${scala.version}</artifactId>
-		<version>${spark.version}</version>
-		<exclusions>
-			<exclusion>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-simple</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.spark</groupId>
-		<artifactId>spark-mllib_${scala.version}</artifactId>
-		<version>${spark.version}</version>
-		<exclusions>
-			<exclusion>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-			</exclusion>
-			<exclusion>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-simple</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.11</version>
-		<scope>test</scope>
-	</dependency>
-    
+	<dependencies>
+	  <!-- Spark -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-mllib_${scala.version}</artifactId>
+			<version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.22</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	  
 	</dependencies>
 
 	<build>
 	
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-dependency-plugin</artifactId>
 			    <executions>
@@ -81,7 +85,7 @@
 			            </configuration>
 			        </execution>
 			    </executions>
-			</plugin>
+			</plugin> -->
 			
 			<plugin>
 			    <groupId>org.springframework.boot</groupId>
@@ -92,15 +96,13 @@
 			                <goal>repackage</goal>
 			            </goals>
 			            <configuration>
-			
 			                <mainClass>com.selimhorri.pack.Main</mainClass>
-			
 			            </configuration>
 			        </execution>
 			    </executions>
 			</plugin>
-		
 		</plugins>
+		<finalName>spark-app</finalName>
 	</build>
 
 </project>

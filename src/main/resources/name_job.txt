@@ -1,0 +1,5 @@
+first_name,last_name,job
+Selim,Horri,Software Engineer
+Amine,Ajimi,Student
+Omar,Derouiche,Agent
+Yesmine,Derouiche,Student
