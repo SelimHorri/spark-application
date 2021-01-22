@@ -10,11 +10,12 @@ import java.util.Properties;
 
 public class Main {
 	
+	private static SparkSession sparkSession;
+	
 	public static void main(String[] args) {
 		
-		final SparkSession sparkSession = new SparkSession.Builder().appName("CSV to DB").master("local").getOrCreate();
-		
-		Dataset<Row> df = sparkSession.read().format("csv").option("header", true).load("src/main/resources/name_job.txt");
+		sparkSession = Main.createSparkSession("CSV to DB", "local");
+		Dataset<Row> df = Main.createDataframeWithHeader("csv", "src/main/resources/name_job.txt");
 		
 		df = df.withColumn("fullName", concat(lit("FIRST_NAME => "), df.col("first_name"), lit(" || "), lit("LAST_NAME => "), df.col("last_name")) );
 		df.show();
@@ -28,6 +29,14 @@ public class Main {
 		df.write().mode(SaveMode.Overwrite).jdbc(dbUrl, "persons", properties);
 		System.out.println("====>> Loaded in the Database <<====");
 		
+	}
+	
+	public static SparkSession createSparkSession(final String appName, final String master) {
+		return new SparkSession.Builder().appName(appName).master(master).getOrCreate();
+	}
+	
+	public static Dataset<Row> createDataframeWithHeader(final String fileFormat, final String filePath) {
+		return sparkSession.read().format(fileFormat).option("header", true).load(filePath);
 	}
 	
 	
