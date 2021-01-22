@@ -1,4 +1,4 @@
-package com.selimhorri.pack;
+package com.selimhorri.pack.dbload;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
